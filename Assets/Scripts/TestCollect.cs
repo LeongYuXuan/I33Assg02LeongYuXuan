@@ -16,6 +16,12 @@ public class TestCollect : MonoBehaviour
 {
     //for testing 
     public GameObject Player;
+
+    //activates upon game starting
+    private void Start()
+    {
+        Player = GameObject.FindGameObjectWithTag("Playe");
+    }
     //interact script
     public void Interact()
     {
