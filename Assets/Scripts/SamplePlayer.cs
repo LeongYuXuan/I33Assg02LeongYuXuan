@@ -1,6 +1,8 @@
 /******************************************************************************
 Author: Elyas Chua-Aziz
 
+Editor: Leong Yu Xuan
+
 Name of Class: DemoPlayer
 
 Description of Class: This class will control the movement and actions of a 
@@ -24,6 +26,9 @@ public class SamplePlayer : MonoBehaviour
     [SerializeField]
     private float rotationSpeed;
 
+    //Test Variable for facilitating quest 
+    public int testCollect;
+
     /// <summary>
     /// The camera attached to the player model.
     /// Should be dragged in from Inspector.
@@ -41,8 +46,7 @@ public class SamplePlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        nextState = "Idle" +
-            "";
+        nextState = "Idle" + "";
     }
 
     // Update is called once per frame
@@ -57,24 +61,35 @@ public class SamplePlayer : MonoBehaviour
         InteractRaycast();
     }
 
+    //raycast for interactions
     private void InteractRaycast()
     {
         //debug line for raycast
         Debug.DrawLine(playerCamera.transform.position,
             playerCamera.transform.position + playerCamera.transform.forward * interactDistance);
         
-        //actual raycast
+        //variable that stores what raycast has hit
         RaycastHit hitinfo;
 
         //layer mask for the raycast. I still do not know how it works
-        int layermask = 1 << LayerMask.NameToLayer("interact");
+        int layermask = 1 << LayerMask.NameToLayer("Interactable");
 
+        //do something if the raycast hits something
         if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hitinfo, interactDistance, layermask))
         {
-            //do something if the raycast hits something
+            //Activate the "Interact" function in obj depending on name
+            //I directly copied this from my ASSG1 Script...
             if (Input.GetKeyDown(KeyCode.E))
             {
-                hitinfo.transform.GetComponent<Interactthing>().Interact();
+                if(hitinfo.transform.tag == "Collectable")
+                {
+                    hitinfo.transform.GetComponent<TestCollect>().Interact();
+                }
+                else if(hitinfo.transform.name == "TestQuestMan")
+                {
+                    hitinfo.transform.GetComponent<TestQuestMan>().Interact();
+                }
+                
             }
         }
 
