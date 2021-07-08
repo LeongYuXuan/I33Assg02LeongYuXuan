@@ -7,6 +7,9 @@ public class Transition : MonoBehaviour
     //for testing 
     public GameObject Player;
 
+    //bool to tell obj which direction to teleport player
+    public bool teleportOnX;
+
     //activates upon game starting
     private void Start()
     {
@@ -29,17 +32,36 @@ public class Transition : MonoBehaviour
 
         //check if player is behind or infront of the obj for teleport
         //Teleport left if player is to the right
-        if (playerPos.z > telePos.z)
+        if (teleportOnX)
         {
-            Player.transform.position = Left;
-            Debug.Log("Move left");
+            if (playerPos.x > telePos.x)
+            {
+                Player.transform.position = Left;
+                
+            }
+            //teleport right if the player is to the left
+            else if (playerPos.x < telePos.x)
+            {
+                Player.transform.position = Right;
+                
+            }
         }
-        //teleport right if the player is to the left
-        else if (playerPos.z < telePos.z)
+        else
         {
-            Player.transform.position = Right;
-            Debug.Log("Move right");
+            if (playerPos.z > telePos.z)
+            {
+                Player.transform.position = Left;
+                
+            }
+            //teleport right if the player is to the left
+            else if (playerPos.z < telePos.z)
+            {
+                Player.transform.position = Right;
+                
+            }
+
         }
+       
 
         //teleport script
         //Player.transform.position = transform.position - (transform.right * 2);
