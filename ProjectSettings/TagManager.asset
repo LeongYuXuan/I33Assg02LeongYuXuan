@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Collectable
   - Playe
+  - Transition
   layers:
   - Default
   - TransparentFX

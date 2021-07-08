@@ -81,6 +81,7 @@ public class SamplePlayer : MonoBehaviour
             //I directly copied this from my ASSG1 Script...
             if (Input.GetKeyDown(KeyCode.E))
             {
+
                 if(hitinfo.transform.tag == "Collectable")
                 {
                     hitinfo.transform.GetComponent<TestCollect>().Interact();
@@ -88,6 +89,10 @@ public class SamplePlayer : MonoBehaviour
                 else if(hitinfo.transform.name == "TestQuestMan")
                 {
                     hitinfo.transform.GetComponent<TestQuestMan>().Interact();
+                }
+                else if(hitinfo.transform.tag == "Transition")
+                {
+                    hitinfo.transform.GetComponent<Transition>().Interact();
                 }
                 
             }
