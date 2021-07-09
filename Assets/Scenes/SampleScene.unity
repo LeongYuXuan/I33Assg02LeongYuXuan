@@ -650,7 +650,7 @@ GameObject:
   - component: {fileID: 97246591}
   - component: {fileID: 97246590}
   m_Layer: 3
-  m_Name: Transition (1)
+  m_Name: Open door
   m_TagString: Transition
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -669,6 +669,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
+  QuestMan: {fileID: 778492406}
   teleportOnX: 0
 --- !u!64 &97246591
 MeshCollider:
@@ -8351,6 +8352,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 1862061006}
   Count: {fileID: 864024348}
+  CompleteQuest1: 0
+  CompleteQuest2: 0
+  GrandQuestStart: 0
 --- !u!136 &778492408
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -10263,7 +10267,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 907285771}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 38, y: 2.5, z: 30}
+  m_LocalPosition: {x: -7.75, y: -5.5, z: -11.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -12887,13 +12891,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1019414089}
-  m_LocalRotation: {x: -0.4999987, y: -0.49999976, z: 0.50000024, w: 0.5000013}
-  m_LocalPosition: {x: 41.5, y: 2.5, z: 25.5}
+  m_LocalRotation: {x: -0.7069974, y: -0.70699894, z: -0.012393792, w: -0.012393835}
+  m_LocalPosition: {x: 26.5, y: 1.5, z: 25.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 11
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: -182.009, z: 90}
 --- !u!1 &1023163331
 GameObject:
   m_ObjectHideFlags: 0
@@ -13360,7 +13364,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1023163331}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 35, y: 2.5, z: 30}
+  m_LocalPosition: {x: -10.75, y: -5.5, z: -11.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -15325,7 +15329,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1211248106}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 40.5, y: 2.5, z: 30}
+  m_LocalPosition: {x: -5.25, y: -5.5, z: -11.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -16790,17 +16794,9 @@ MonoBehaviour:
   assetGuid: 
   m_Mesh: {fileID: 922975216}
   m_IsSelectable: 1
-  m_SelectedFaces: 0c000000
-  m_SelectedEdges:
-  - a: 48
-    b: 49
-  - a: 50
-    b: 48
-  - a: 49
-    b: 51
-  - a: 51
-    b: 50
-  m_SelectedVertices: 30000000310000003200000033000000
+  m_SelectedFaces: 
+  m_SelectedEdges: []
+  m_SelectedVertices: 
 --- !u!4 &1280509957
 Transform:
   m_ObjectHideFlags: 0
@@ -16808,13 +16804,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1280509951}
-  m_LocalRotation: {x: -0.4999987, y: -0.49999976, z: 0.50000024, w: 0.5000013}
-  m_LocalPosition: {x: 38.5, y: 2.5, z: 25.5}
+  m_LocalRotation: {x: -0.70336694, y: -0.70336825, z: -0.07262258, w: -0.072622895}
+  m_LocalPosition: {x: -6.5, y: 1.5, z: 11.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 13
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: -191.79, z: 90}
 --- !u!1001 &1288672557
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20307,15 +20303,9 @@ MonoBehaviour:
   assetGuid: 
   m_Mesh: {fileID: 210068447}
   m_IsSelectable: 1
-  m_SelectedFaces: 2e000000
-  m_SelectedEdges:
-  - a: 151
-    b: 152
-  - a: 152
-    b: 153
-  - a: 153
-    b: 151
-  m_SelectedVertices: 970000009800000099000000
+  m_SelectedFaces: 
+  m_SelectedEdges: []
+  m_SelectedVertices: 
 --- !u!4 &1762431996
 Transform:
   m_ObjectHideFlags: 0
@@ -20324,7 +20314,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1762431990}
   m_LocalRotation: {x: -0.4999987, y: -0.49999976, z: 0.50000024, w: 0.5000013}
-  m_LocalPosition: {x: 40, y: 2.5, z: 25.5}
+  m_LocalPosition: {x: 15.5, y: 1.5, z: 42.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -28674,7 +28664,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1952176631}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 39.242077, y: 2.5, z: 30}
+  m_LocalPosition: {x: -6.507923, y: -5.5, z: -11.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -28847,7 +28837,7 @@ GameObject:
   - component: {fileID: 2042008815}
   - component: {fileID: 2042008814}
   m_Layer: 3
-  m_Name: Transition
+  m_Name: Enter/Exit temple
   m_TagString: Transition
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28866,6 +28856,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
+  QuestMan: {fileID: 778492406}
   teleportOnX: 1
 --- !u!64 &2042008815
 MeshCollider:
@@ -29629,7 +29620,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2131193332}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 36.5, y: 2.5, z: 30}
+  m_LocalPosition: {x: -9.25, y: -5.5, z: -11.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

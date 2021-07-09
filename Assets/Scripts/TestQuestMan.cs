@@ -24,17 +24,18 @@ public class TestQuestMan : MonoBehaviour
     public Text Count;
 
     //bool to prevent repeated interactions and trigger quest2
-    private bool CompleteQuest1 = false;
+    [HideInInspector]
+    public bool CompleteQuest1 = false;
     //bool to prevent repeated interactions and trigger quest2
-    private bool CompleteQuest2 = false;
+    [HideInInspector]
+    public bool CompleteQuest2 = false;
     //bool to start quest
-    private bool GrandQuestStart = false;
+    [HideInInspector]
+    public bool GrandQuestStart = false;
 
     //interact script
     public void Interact() 
     {
-       
-
         //Only Start quest code if player actually talks to the guy first
         if (GrandQuestStart)
         {

@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class Transition : MonoBehaviour
 {
-    //for testing 
+    //store's player obj for reference later 
     public GameObject Player;
+
+    //var to store quest man as bools used there would be used to lock transitions
+    public GameObject QuestMan;
 
     //bool to tell obj which direction to teleport player
     public bool teleportOnX;
@@ -30,35 +33,53 @@ public class Transition : MonoBehaviour
         //Right teleport coord
         Vector3 Right = transform.position - (-transform.right * 2);
 
-        //check if player is behind or infront of the obj for teleport
-        //Teleport left if player is to the right
+        //teleports player on x or z axis depending on the bool
         if (teleportOnX)
         {
-            if (playerPos.x > telePos.x)
+            //activate teleport if player has started the quest
+            if (QuestMan.GetComponent<TestQuestMan>().GrandQuestStart)
             {
-                Player.transform.position = Left;
-                
-            }
-            //teleport right if the player is to the left
-            else if (playerPos.x < telePos.x)
+                //Teleport left if player is to the right
+                if (playerPos.x > telePos.x)
+                {
+                    Player.transform.position = Left;
+
+                }
+                //teleport right if the player is to the left
+                else if (playerPos.x < telePos.x)
+                {
+                    Player.transform.position = Right;
+
+                }
+            }//give message regarding why transition is locked
+            else
             {
-                Player.transform.position = Right;
-                
+                Debug.Log("There's a hole here, but there are boxes in the way.");
             }
+            
         }
         else
         {
-            if (playerPos.z > telePos.z)
+            if (QuestMan.GetComponent<TestQuestMan>().CompleteQuest1)
             {
-                Player.transform.position = Left;
-                
+                //Teleport left if player is to the right
+                if (playerPos.z > telePos.z)
+                {
+                    Player.transform.position = Left;
+
+                }
+                //teleport right if the player is to the left
+                else if (playerPos.z < telePos.z)
+                {
+                    Player.transform.position = Right;
+
+                }
             }
-            //teleport right if the player is to the left
-            else if (playerPos.z < telePos.z)
+            else
             {
-                Player.transform.position = Right;
-                
+                Debug.Log("This leads somewhere, but you don't dare to open the door.");
             }
+            
 
         }
        
