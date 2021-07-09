@@ -33,6 +33,9 @@ public class SamplePlayer : MonoBehaviour
     //Variable that stores the text under crosshair
     public Text objectName;
 
+    //Variable that stores the nunmber of items collected
+    public Text Count;
+
     /// <summary>
     /// The camera attached to the player model.
     /// Should be dragged in from Inspector.
@@ -51,6 +54,7 @@ public class SamplePlayer : MonoBehaviour
     void Start()
     {
         nextState = "Idle" + "";
+        Count.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
