@@ -14,6 +14,7 @@ Date Created: 09/06/2021
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SamplePlayer : MonoBehaviour
 {
@@ -28,6 +29,9 @@ public class SamplePlayer : MonoBehaviour
 
     //Test Variable for facilitating quest 
     public int testCollect;
+
+    //Variable that stores the text under crosshair
+    public Text objectName;
 
     /// <summary>
     /// The camera attached to the player model.
@@ -76,7 +80,8 @@ public class SamplePlayer : MonoBehaviour
 
         //do something if the raycast hits something
         if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hitinfo, interactDistance, layermask))
-        {
+        {    
+
             //Activate the "Interact" function in obj depending on name
             //I directly copied this from my ASSG1 Script...
             if (Input.GetKeyDown(KeyCode.E))
@@ -96,10 +101,22 @@ public class SamplePlayer : MonoBehaviour
                 }
                 
             }
+
+            ///summary
+            ///change the text in under the crosshair 
+            objectName.text = hitinfo.transform.name;
+        } //do something if raycast hits nothing
+        else
+        {
+            objectName.text = "";
         }
+        
+        
 
     }
 
+    
+    
     /// <summary>
     /// Sets the current state of the player
     /// and starts the correct coroutine.
