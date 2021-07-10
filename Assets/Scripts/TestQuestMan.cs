@@ -3,7 +3,7 @@ Author: Leong Yu Xuan
 
 Name of Class: TestQuestMan
 
-Description of Class: This class gives an input depending on 
+Description of Class: This class gives an output depending on 
                         how many collectables DemoPlayer has collected. 
                         Quest complete when 3 TestCollects have been gathered.
 

@@ -1,3 +1,17 @@
+/******************************************************************************
+Author: Leong Yu Xuan
+
+Name of Class: TestQuestMan
+
+Description of Class: This class teleports the player to the opposite side of the obj it 
+                        is assigned to. It moves the player on the Z or X axis depending
+                        on the bool.
+                        Teleports have hard-coded lock at the moment for gameplay
+                        progress reasons
+                        
+
+Date Created: 08/07/2021
+******************************************************************************/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

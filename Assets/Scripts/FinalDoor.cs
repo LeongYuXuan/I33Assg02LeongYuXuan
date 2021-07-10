@@ -5,7 +5,7 @@ Name of Class: FinalDoor
 
 Description of Class: This class controls the status of the final door and the dialogue text upon being interacted with. Door opens if player bool "Open sesame" is true.
 
-Date Created: 06/07/2021
+Date Created: 10/07/2021
 ******************************************************************************/
 using System.Collections;
 using System.Collections.Generic;
