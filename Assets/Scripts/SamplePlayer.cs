@@ -7,6 +7,8 @@ Name of Class: DemoPlayer
 
 Description of Class: This class will control the movement and actions of a 
                         player avatar based on user input.
+                        Movement control, Camera control and Interaction control.
+                        Also controls the display of some Text elements from the UI 
 
 Date Created: 09/06/2021
 ******************************************************************************/
@@ -30,11 +32,18 @@ public class SamplePlayer : MonoBehaviour
     //Test Variable for facilitating quest 
     public int testCollect;
 
-    //Variable that stores the text under crosshair
+    //Stores UI Text that display's object name
     public Text objectName;
 
-    //Variable that stores the nunmber of items collected
+    //Stores UI Text that displays number of quest items collected
     public Text Count;
+
+    //Stores UI Text that displays dialogue
+    public Text Dialogue;
+
+    //Bool that stores whether player met criteria to open final door
+    //[HideInInspector]
+    public bool OpenSesame = false;
 
     /// <summary>
     /// The camera attached to the player model.
@@ -54,7 +63,11 @@ public class SamplePlayer : MonoBehaviour
     void Start()
     {
         nextState = "Idle" + "";
+        //set item count inactive on awake
         Count.gameObject.SetActive(false);
+        //set Dialogue box to inactive on awake
+        Dialogue.gameObject.SetActive(false);
+
     }
 
     // Update is called once per frame
@@ -103,7 +116,11 @@ public class SamplePlayer : MonoBehaviour
                 {
                     hitinfo.transform.GetComponent<Transition>().Interact();
                 }
-                
+                else if (hitinfo.transform.tag == "FinalDoor")
+                {
+                    hitinfo.transform.GetComponent<FinalDoor>().Interact();
+                }
+
             }
 
             ///summary
