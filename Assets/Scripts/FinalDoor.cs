@@ -30,50 +30,46 @@ public class FinalDoor : MonoBehaviour
     {
         //Stop all coroutines upon interact (only text as of now)
         StopAllCoroutines();
-        StartCoroutine(DialogueControl());
+        Function();
     }
 
     //Coroutine that controls dialogue display
-    IEnumerator DialogueControl()
+    public void Function()
     {
-        for(int i = 0; i < 2; ++i)
+        if (!Player.transform.GetComponent<SamplePlayer>().OpenSesame)
         {
-            //dialogue to show if player cannot open final door
-            if (!Player.transform.GetComponent<SamplePlayer>().OpenSesame)
-            {
-                if (i == 0)
-                {
-                    Dialogue.gameObject.SetActive(true);
-                    Dialogue.text = "The door won't budge";
+            StartCoroutine(DialogueControl("What a strange door"));
+        }
+        else
+        {
 
-                }
-                else if (i == 1)
-                {
-                    Dialogue.text = "";
-                    Dialogue.gameObject.SetActive(false);
-                }
-            }
-            else
-            {
-                if (i == 0)
-                {
-                    Dialogue.gameObject.SetActive(true);
-                    Dialogue.text = "Woah it's 'Moving'";
-                    GetComponent<MeshCollider>().enabled = false;
-                    GetComponent<MeshRenderer>().enabled = false;
+            StartCoroutine(DialogueControl("Woah, it's moving"));
+            GetComponent<MeshCollider>().enabled = false;
+            GetComponent<MeshRenderer>().enabled = false;
 
-                }
-                else if (i == 1)
-                {
-                    Dialogue.text = "";
-                    Dialogue.gameObject.SetActive(false);
-                }
+        }
+    }
+    //Coroutine that controls dialogue display. Variable "a" is the text to display
+    IEnumerator DialogueControl(string a)
+    {
+        for (int i = 0; i < 2; ++i)
+        {
+            //show assigned dialogue and make it disappear after 5 seconds
+
+            if (i == 0)
+            {
+                Dialogue.gameObject.SetActive(true);
+                Dialogue.text = a;
 
             }
-           
+            else if (i == 1)
+            {
+                Dialogue.text = "";
+                Dialogue.gameObject.SetActive(false);
+            }
+
             yield return new WaitForSeconds(5f);
         }
- 
+
     }
-    
 }
