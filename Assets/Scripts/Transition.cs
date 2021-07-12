@@ -15,6 +15,7 @@ Date Created: 08/07/2021
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Transition : MonoBehaviour
 {
@@ -27,14 +28,15 @@ public class Transition : MonoBehaviour
     //bool to tell obj which direction to teleport player
     public bool teleportOnX;
 
-    //activates upon game starting
-    private void Start()
-    {
-        
-    }
+    //Store UI text component shows interact dialogue
+    public Text Dialogue;
+
     //interact script
     public void Interact()
     {
+        //Stop all coroutines upon interact (only text as of now)
+        StopAllCoroutines();
+
         //Update player position via updating player obj
         Player = GameObject.FindGameObjectWithTag("Playe");
         //var to store player pos for easier management
@@ -68,7 +70,7 @@ public class Transition : MonoBehaviour
             }//give message regarding why transition is locked
             else
             {
-                Debug.Log("There's a hole here, but there are boxes in the way.");
+                StartCoroutine(DialogueControl("There's a hole here, but there are boxes in the way."));
             }
             
         }
@@ -91,15 +93,36 @@ public class Transition : MonoBehaviour
             }
             else
             {
-                Debug.Log("This leads somewhere, but you don't dare to open the door.");
+                StartCoroutine(DialogueControl("Such strange ruin. You wouldn't dare enter."));
             }
             
 
         }
-       
 
-        //teleport script
-        //Player.transform.position = transform.position - (transform.right * 2);
-        
+
+        //Coroutine that controls dialogue display. Variable "a" is the text to display
+        IEnumerator DialogueControl(string a)
+        {
+            for (int i = 0; i < 2; ++i)
+            {
+                //show assigned dialogue and make it disappear after 5 seconds
+
+                if (i == 0)
+                {
+                    Dialogue.gameObject.SetActive(true);
+                    Dialogue.text = a;
+
+                }
+                else if (i == 1)
+                {
+                    Dialogue.text = "";
+                    Dialogue.gameObject.SetActive(false);
+                }
+
+                yield return new WaitForSeconds(5f);
+            }
+
+        }
+
     }
 }

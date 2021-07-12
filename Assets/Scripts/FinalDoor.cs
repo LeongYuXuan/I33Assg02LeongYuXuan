@@ -17,7 +17,7 @@ public class FinalDoor : MonoBehaviour
     //stores player object to refer to code later 
     public GameObject Player;
 
-    //Store UI text component that it would impact
+    //Store UI text component shows interact dialogue
     public Text Dialogue;
 
     //activates upon game starting
@@ -28,6 +28,8 @@ public class FinalDoor : MonoBehaviour
     //interact script
     public void Interact()
     {
+        //Stop all coroutines upon interact (only text as of now)
+        StopAllCoroutines();
         StartCoroutine(DialogueControl());
     }
 
