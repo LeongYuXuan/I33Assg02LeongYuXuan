@@ -120,6 +120,10 @@ public class SamplePlayer : MonoBehaviour
                 {
                     hitinfo.transform.GetComponent<FinalDoor>().Interact();
                 }
+                else if (hitinfo.transform.tag == "FinalItem")
+                {
+                    hitinfo.transform.GetComponent<FinalItem>().Interact();
+                }
 
             }
 

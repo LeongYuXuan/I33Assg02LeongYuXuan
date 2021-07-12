@@ -15,7 +15,7 @@ using UnityEngine.UI;
 
 public class TestCollect : MonoBehaviour
 {
-    //for testing 
+    //variable that stores the game object that the script would impact 
     public GameObject Player;
 
     //Text that it would impact

@@ -8,6 +8,7 @@ TagManager:
   - Playe
   - Transition
   - FinalDoor
+  - FinalItem
   layers:
   - Default
   - TransparentFX
