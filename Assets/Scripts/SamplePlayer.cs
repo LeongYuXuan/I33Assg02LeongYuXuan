@@ -41,6 +41,12 @@ public class SamplePlayer : MonoBehaviour
     //Stores UI Text that displays dialogue
     public Text Dialogue;
 
+    //Stores Setting UI to refer to later
+    public GameObject SettingsUI;
+
+    //private bool to toggle the Settings UI
+    private bool toggle = false;
+
     //Bool that stores whether player met criteria to open final door
     //[HideInInspector]
     public bool OpenSesame = false;
@@ -77,9 +83,19 @@ public class SamplePlayer : MonoBehaviour
         {
             SwitchState();
         }
-
         CheckRotation();
         InteractRaycast();
+        MenuTrigger();
+    }
+
+    //Button to trigger Player Setting UI
+    private void MenuTrigger()
+    {
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            toggle = !toggle;
+            SettingsUI.SetActive(toggle);
+        }
     }
 
     //raycast for interactions
@@ -98,12 +114,10 @@ public class SamplePlayer : MonoBehaviour
         //do something if the raycast hits something
         if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hitinfo, interactDistance, layermask))
         {    
-
             //Activate the "Interact" function in obj depending on name
             //I directly copied this from my ASSG1 Script...
             if (Input.GetKeyDown(KeyCode.E))
             {
-
                 if(hitinfo.transform.tag == "Collectable")
                 {
                     hitinfo.transform.GetComponent<TestCollect>().Interact();
@@ -124,9 +138,7 @@ public class SamplePlayer : MonoBehaviour
                 {
                     hitinfo.transform.GetComponent<FinalItem>().Interact();
                 }
-
             }
-
             ///summary
             ///change the text in under the crosshair 
             objectName.text = hitinfo.transform.name;
@@ -134,13 +146,9 @@ public class SamplePlayer : MonoBehaviour
         else
         {
             objectName.text = "";
-        }
-        
-        
-
+        }        
     }
 
-    
     
     /// <summary>
     /// Sets the current state of the player
