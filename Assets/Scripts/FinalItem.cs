@@ -41,9 +41,10 @@ public class FinalItem : MonoBehaviour
         Count.text = "Things Collected: " + Player.GetComponent<SamplePlayer>().testCollect;
         
         //interesting text
-        StartCoroutine(DialogueControl("Huh, this looks interesting"));
-        //set to inactive
-        
+        StartCoroutine(DialogueControl("Huh, this looks interesting."));
+        //set mesh renderer and collider to false
+        GetComponent<MeshCollider>().enabled = false;
+        GetComponent<MeshRenderer>().enabled = false;
     }
 
     IEnumerator DialogueControl(string a)
@@ -61,8 +62,7 @@ public class FinalItem : MonoBehaviour
             {
                 Dialogue.text = "";
                 Dialogue.gameObject.SetActive(false);
-                //modified to 
-                gameObject.SetActive(false);
+                
             }
 
             yield return new WaitForSeconds(5f);
