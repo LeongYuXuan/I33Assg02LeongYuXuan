@@ -17,6 +17,9 @@ public class FinalDoor : MonoBehaviour
     //stores player object to refer to code later 
     public GameObject Player;
 
+    //stores Quest man NPC to refer to code later 
+    public GameObject QuestMan;
+
     //Store UI text component shows interact dialogue
     public Text Dialogue;
 
@@ -36,14 +39,14 @@ public class FinalDoor : MonoBehaviour
     //Coroutine that controls dialogue display
     public void Function()
     {
-        if (!Player.transform.GetComponent<SamplePlayer>().OpenSesame)
+        if (!Player.transform.GetComponent<SamplePlayer>().OpenSesame || !QuestMan.transform.GetComponent<TestQuestMan>().CompleteQuest2)
         {
             StartCoroutine(DialogueControl("What a strange door"));
         }
         else
         {
 
-            StartCoroutine(DialogueControl("Woah, it's moving"));
+            StartCoroutine(DialogueControl("Woah, it disappeared. It's like the coder could not be bothered to animate it, hahaha..."));
             GetComponent<MeshCollider>().enabled = false;
             GetComponent<MeshRenderer>().enabled = false;
 

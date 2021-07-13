@@ -55,7 +55,7 @@ public class TestQuestMan : MonoBehaviour
 
                 if (Player.GetComponent<SamplePlayer>().testCollect < 3)
                 {
-                    StartCoroutine(DialogueControl("Interact with me once you collect 3 circles"));
+                    StartCoroutine(DialogueControl("Remember, I need 3 batteries", false, "b"));
                 }
 
                 else if (Player.GetComponent<SamplePlayer>().testCollect >= 3 && !CompleteQuest1)
@@ -64,21 +64,23 @@ public class TestQuestMan : MonoBehaviour
                     //reset values for the next quest
                     Player.GetComponent<SamplePlayer>().testCollect = 0;
                     Count.text = "Things Collected: " + "0";
-                    StartCoroutine(DialogueControl("Hehe, nice. \n Here is your 2nd quest: Collect 5 cones"));
+                    StartCoroutine(DialogueControl("Thank you for those, I really needed the heat. \n" +
+                        "You may have seen the ruins outside. We suspect there could be some artefacts in there. Could you get 6 of such?", true, 
+                        "Here, I gave you a spare heat lamp. Don't ask why I bought two but only had one battery..."));
                 }
             }
             //execute quest 2 code if quest 1 is complete and quest 2 isn't
             else if (!CompleteQuest2)
             {
                 //repeat dialog if player has not met criteria
-                if (Player.GetComponent<SamplePlayer>().testCollect < 5)
+                if (Player.GetComponent<SamplePlayer>().testCollect < 6)
                 {
-                    StartCoroutine(DialogueControl("Interact with me again once you collect 5 cones"));
+                    StartCoroutine(DialogueControl("We would like 6 artefacts to observe after we are done setting up...", false, "b"));
                 }
                 //do things once reaching criteria
-                if (Player.GetComponent<SamplePlayer>().testCollect >= 5 && !CompleteQuest2)
+                if (Player.GetComponent<SamplePlayer>().testCollect >= 6 && !CompleteQuest2)
                 {
-                    StartCoroutine(DialogueControl("Two Parter Complete!"));
+                    StartCoroutine(DialogueControl("Wow, did't expect you to actually come back with 6. That's superb on your part.", true, "A key? I think this door had a keyhole, you could try it on that."));
                     //resets value or something.
                     Player.GetComponent<SamplePlayer>().testCollect = 0;
                     Count.text = "Things Collected: " + "0";
@@ -88,7 +90,7 @@ public class TestQuestMan : MonoBehaviour
             }
             else
             {
-                StartCoroutine(DialogueControl("Very Nice"));
+                StartCoroutine(DialogueControl("Try it on the door, I have your back", false, "b"));
             }
         }
 
@@ -98,30 +100,60 @@ public class TestQuestMan : MonoBehaviour
             GrandQuestStart = true;
             Count.gameObject.SetActive(true);
             Count.text = "Things Collected: " + "0";
-            StartCoroutine(DialogueControl("Hey there! Welcome to test... place. You just got your first quest; collect 3 circles."));
+            StartCoroutine(DialogueControl("Hey, you're a little late. Everyone but me went to collect supplies.", 
+                true, "I'm trying to find a non-destructive way to open this door, but it is getting cold. \n" +
+                "Could you find three batteries? There should be some outside, I only found one here..."));
+           
         }
     }
 
     //Coroutine that controls dialogue display. Variable "a" is the text to display
-    IEnumerator DialogueControl(string a)
+    IEnumerator DialogueControl(string a, bool Talk2, string b)
     {
         for (int i = 0; i < 2; ++i)
         {
-            //show assigned dialogue and make it disappear after 5 seconds
+            //show assigned dialogue and make it disappear after 7 seconds
+            if (i == 0)
+            {
+                Dialogue.gameObject.SetActive(true);
+                Dialogue.text = a;
 
-                if (i == 0)
+            }
+            else if (i == 1)
+            {
+                Dialogue.text = "";
+                Dialogue.gameObject.SetActive(false);
+                if (Talk2)
                 {
-                    Dialogue.gameObject.SetActive(true);
-                    Dialogue.text = a;
-
+                    StartCoroutine(AltDialogueControl(b));
                 }
-                else if (i == 1)
-                {
-                    Dialogue.text = "";
-                    Dialogue.gameObject.SetActive(false);
-                }
+            }
 
-            yield return new WaitForSeconds(5f);
+
+            yield return new WaitForSeconds(7f);
+        }
+
+    }
+    //For twoparter dialogue. Test function
+    IEnumerator AltDialogueControl(string a)
+    {
+        for (int i = 0; i < 2; ++i)
+        {
+            //show assigned dialogue and make it disappear after 7 seconds
+
+            if (i == 0)
+            {
+                Dialogue.gameObject.SetActive(true);
+                Dialogue.text = a;
+
+            }
+            else if (i == 1)
+            {
+                Dialogue.text = "";
+                Dialogue.gameObject.SetActive(false);
+            }
+
+            yield return new WaitForSeconds(7f);
         }
 
     }

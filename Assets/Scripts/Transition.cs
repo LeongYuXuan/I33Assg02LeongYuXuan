@@ -93,7 +93,7 @@ public class Transition : MonoBehaviour
             }
             else
             {
-                StartCoroutine(DialogueControl("Such strange ruin. You wouldn't dare enter."));
+                StartCoroutine(DialogueControl("A strong freezing gale. It's too cold to enter..."));
             }
             
 

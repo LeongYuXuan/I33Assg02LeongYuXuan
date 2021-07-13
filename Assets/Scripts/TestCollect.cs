@@ -18,7 +18,7 @@ public class TestCollect : MonoBehaviour
     //variable that stores the game object that the script would impact 
     public GameObject Player;
 
-    //Text that it would impact
+    //Stores UI text that shows the number of items collected
     public Text Count;
 
     //activates upon game starting

@@ -18,8 +18,11 @@ public class FinalItem : MonoBehaviour
     //variable that stores the game object that the script would impact 
     public GameObject Player;
 
-    //Store UI text component shows interact dialogue
+    //Store UI text component that shows interact dialogue
     public Text Dialogue;
+
+    //Stores UI text that shows the number of items collected
+    public Text Count;
 
     //activates upon game starting
     private void Start()
@@ -32,10 +35,15 @@ public class FinalItem : MonoBehaviour
         StopAllCoroutines();
         //changes the status of "openSesame" to true
         Player.transform.GetComponent<SamplePlayer>().OpenSesame = true;
+
+        //add one to the no. of things collected
+        Player.GetComponent<SamplePlayer>().testCollect += 1;
+        Count.text = "Things Collected: " + Player.GetComponent<SamplePlayer>().testCollect;
+        
         //interesting text
         StartCoroutine(DialogueControl("Huh, this looks interesting"));
         //set to inactive
-        gameObject.SetActive(false);
+        
     }
 
     IEnumerator DialogueControl(string a)
@@ -53,6 +61,8 @@ public class FinalItem : MonoBehaviour
             {
                 Dialogue.text = "";
                 Dialogue.gameObject.SetActive(false);
+                //modified to 
+                gameObject.SetActive(false);
             }
 
             yield return new WaitForSeconds(5f);
