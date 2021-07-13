@@ -100,9 +100,9 @@ public class TestQuestMan : MonoBehaviour
             GrandQuestStart = true;
             Count.gameObject.SetActive(true);
             Count.text = "Things Collected: " + "0";
-            StartCoroutine(DialogueControl("Hey, you're a little late. Everyone but me went to collect supplies.", 
-                true, "I'm trying to find a non-destructive way to open this door, but it is getting cold. \n" +
-                "Could you find three batteries? There should be some outside, I only found one here..."));
+            StartCoroutine(DialogueControl("Hey, you're a little late. Everyone but me went to collect tools. Can you believe they forgot to get the crowbar?", 
+                true, "I'm trying to find a non-destructive way to open this door, but it is getting cold. Could you find three batteries? \n" +
+                "There should be some outside, I only have one on me..."));
            
         }
     }
