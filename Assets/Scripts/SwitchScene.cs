@@ -4,6 +4,7 @@ Author: Leong Yu Xuan
 Name of Class: SwitchScene
 
 Description of Class: A very simple class. Switch to specified scene upon being activated by a button
+                        Doubles as the script for quitting the game
                         
 
 Date Created: 14/07/2021
@@ -26,5 +27,14 @@ public class SwitchScene : MonoBehaviour
    public void ChangeScene()
     {
         SceneManager.LoadScene(SceneToLoad);
+    }
+
+    ///<summary>
+    ///Function for quitting the game
+    ///</summary>
+    public void End()
+    {
+        Debug.Log("End");
+        Application.Quit();
     }
 }
