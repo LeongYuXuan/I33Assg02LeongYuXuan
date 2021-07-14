@@ -91,14 +91,16 @@ public class SamplePlayer : MonoBehaviour
     //Button to trigger Player Setting UI
     private void MenuTrigger()
     {
-        if (Input.GetKey(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             toggle = !toggle;
             SettingsUI.SetActive(toggle);
         }
     }
 
-    //raycast for interactions
+    ///<summary>
+    ///function for raycast used for interactions
+    /// </summary>
     private void InteractRaycast()
     {
         //debug line for raycast
