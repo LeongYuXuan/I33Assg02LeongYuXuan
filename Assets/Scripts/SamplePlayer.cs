@@ -29,26 +29,45 @@ public class SamplePlayer : MonoBehaviour
     [SerializeField]
     private float rotationSpeed;
 
-    //Test Variable for facilitating quest 
+    /// <summary>
+    /// The number of quest items the player has
+    /// </summary> 
     public int testCollect;
 
-    //Stores UI Text that display's object name
+    /// <summary>
+    /// Store text that shows Interactable obj name
+    /// </summary>
     public Text objectName;
 
-    //Stores UI Text that displays number of quest items collected
+    /// <summary>
+    ///Store text that shows no. of collected quest objs
+    /// </summary>
     public Text Count;
 
-    //Stores UI Text that displays dialogue
+    /// <summary>
+    /// Stores text that shows dialogue 
+    /// </summary>
     public Text Dialogue;
 
-    //Stores Setting UI to refer to later
+    /// <summary>
+    /// Stores settings UI
+    /// </summary>
     public GameObject SettingsUI;
 
-    //private bool to toggle the Settings UI
+    /// <summary>
+    /// Bool to toggle SetActive() of SettingsUI
+    /// </summary>
     private bool toggle = false;
 
-    //Bool that stores whether player met criteria to open final door
-    //[HideInInspector]
+    /// <summary>
+    /// Bool used to control if player can move (include move camera) 
+    /// </summary>
+    public bool CanMove = true;
+
+    /// <summary>
+    /// Bool to control whether player can open final door
+    /// </summary>
+    [HideInInspector]
     public bool OpenSesame = false;
 
     /// <summary>
@@ -62,7 +81,9 @@ public class SamplePlayer : MonoBehaviour
 
     private string nextState;
 
-    //Used for interaction. Var to determin interaction distance in unity units
+    /// <summary>
+    /// Float used for raycasting to determine distance of cast 
+    /// </summary>
     [SerializeField] private float interactDistance;
 
     // Start is called before the first frame update
@@ -88,13 +109,16 @@ public class SamplePlayer : MonoBehaviour
         MenuTrigger();
     }
 
-    //Button to trigger Player Setting UI
+    /// <summary>
+    /// Function that brings up the settings menu 
+    /// </summary>
     private void MenuTrigger()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             toggle = !toggle;
             SettingsUI.SetActive(toggle);
+            CanMove = !CanMove;
         }
     }
 
@@ -141,10 +165,11 @@ public class SamplePlayer : MonoBehaviour
                     hitinfo.transform.GetComponent<FinalItem>().Interact();
                 }
             }
-            ///summary
-            ///change the text in under the crosshair 
+            /// <summary>
+            /// Change text to display obj name
+            /// </summary> 
             objectName.text = hitinfo.transform.name;
-        } //do something if raycast hits nothing
+        } //reset name to blank if it detects nothing
         else
         {
             objectName.text = "";
@@ -164,7 +189,9 @@ public class SamplePlayer : MonoBehaviour
     }
 
 
-    //Coroutine for the "idle" state
+    /// <summary>
+    /// Coroutine for the idle state 
+    /// </summary>
     private IEnumerator Idle()
     {
         while(currentState == "Idle")
@@ -173,12 +200,14 @@ public class SamplePlayer : MonoBehaviour
             if(Input.GetAxis("Horizontal") !!= 0 || Input.GetAxis("Vertical") != 0)
             {
                 nextState = "Moving";
-                //Debug.Log("Move");
+                
             }
             yield return null;
         }
     }
-    //Coroutine for the "moving" state
+    /// <summary>
+    /// Coroutine for the moving state
+    /// </summary>
     private IEnumerator Moving()
     {
         while (currentState == "Moving")
@@ -186,7 +215,7 @@ public class SamplePlayer : MonoBehaviour
             if (!CheckMovement())
             {
                 nextState = "Idle";
-                //Debug.Log("Stop");
+                
                 
             }
             yield return null;
@@ -194,19 +223,28 @@ public class SamplePlayer : MonoBehaviour
         
     }
 
-    //This affected camera movement
+    /// <summary>
+    /// Checks and handles camera movement
+    /// </summary>
+    
     private void CheckRotation()
     {
+        
         Vector3 playerRotation = transform.rotation.eulerAngles;
-        playerRotation.y += Input.GetAxis("Mouse X") * rotationSpeed * Time.deltaTime;
 
-        transform.rotation = Quaternion.Euler(playerRotation);
+        if (CanMove)
+        {
+            playerRotation.y += Input.GetAxis("Mouse X") * rotationSpeed * Time.deltaTime;
 
-        //changing from += to -= makes the camera move as intended
-        Vector3 cameraRotation = playerCamera.transform.rotation.eulerAngles;
-        cameraRotation.x -= Input.GetAxis("Mouse Y") * rotationSpeed * Time.deltaTime;
+            transform.rotation = Quaternion.Euler(playerRotation);
 
-        playerCamera.transform.rotation = Quaternion.Euler(cameraRotation);
+            //changing from += to -= makes the camera move as intended
+            Vector3 cameraRotation = playerCamera.transform.rotation.eulerAngles;
+            cameraRotation.x -= Input.GetAxis("Mouse Y") * rotationSpeed * Time.deltaTime;
+
+            playerCamera.transform.rotation = Quaternion.Euler(cameraRotation);
+        }
+        
     }
 
     /// <summary>
@@ -215,29 +253,34 @@ public class SamplePlayer : MonoBehaviour
     /// <returns>True if user input is detected and player is moved.</returns>
     private bool CheckMovement()
     {
-        //this was deemed unecessary. Commenting out affected nothing (I hope)
-        //Vector3 newPos = transform.position;
 
-        //move left and right (Problematic)
+        //move left and right
         Vector3 xMovement = transform.right * Input.GetAxis("Horizontal");
-        //move forward and bacl
+        //move forward and back
         Vector3 zMovement = transform.forward * Input.GetAxis("Vertical");
 
         Vector3 movementVector = xMovement + zMovement;
 
         //HAs something to do with movement
-        if(movementVector.sqrMagnitude > 0)
+        if (CanMove)
         {
-            movementVector *= (moveSpeed * Time.deltaTime);
-            //newPos = movementVector;
+            if (movementVector.sqrMagnitude > 0)
+            {
+                movementVector *= (moveSpeed * Time.deltaTime);
 
-            transform.position += movementVector;
-            return true;
+                transform.position += movementVector;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         else
         {
             return false;
         }
+        
 
     }
 }
