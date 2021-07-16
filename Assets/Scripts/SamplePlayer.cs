@@ -142,17 +142,20 @@ public class SamplePlayer : MonoBehaviour
         {    
             //Activate the "Interact" function in obj depending on name
             //I directly copied this from my ASSG1 Script...
+            //Highly unoptimised, yikes
             if (Input.GetKeyDown(KeyCode.E))
             {
-                if(hitinfo.transform.tag == "Collectable")
+
+
+                if (hitinfo.transform.tag == "Collectable")
                 {
-                    hitinfo.transform.GetComponent<TestCollect>().Interact();
+                    hitinfo.transform.GetComponent<Collectable>().Interact();
                 }
-                else if(hitinfo.transform.name == "TestQuestMan")
+                else if (hitinfo.transform.tag == "TestQuestMan")
                 {
                     hitinfo.transform.GetComponent<TestQuestMan>().Interact();
                 }
-                else if(hitinfo.transform.tag == "Transition")
+                else if (hitinfo.transform.tag == "Transition")
                 {
                     hitinfo.transform.GetComponent<Transition>().Interact();
                 }
@@ -164,6 +167,15 @@ public class SamplePlayer : MonoBehaviour
                 {
                     hitinfo.transform.GetComponent<FinalItem>().Interact();
                 }
+                else if (hitinfo.transform.tag == "Switch")
+                {
+                    hitinfo.transform.GetComponent<Switch>().Interact();
+                }
+                else //for anything else that is not the above
+                {
+                    hitinfo.transform.GetComponent<Talk>().Interact();
+                }
+
             }
             /// <summary>
             /// Change text to display obj name

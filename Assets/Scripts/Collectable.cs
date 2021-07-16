@@ -13,7 +13,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TestCollect : MonoBehaviour
+public class Collectable : MonoBehaviour
 {
     ///<summary>
     ///Store player obj to access testCollect
