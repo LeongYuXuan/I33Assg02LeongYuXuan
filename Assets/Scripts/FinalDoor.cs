@@ -14,13 +14,19 @@ using UnityEngine.UI;
 
 public class FinalDoor : MonoBehaviour
 {
-    //stores player object to refer to code later 
+    ///<summary>
+    ///Var to store player obj to check bool from
+    /// </summary> 
     public GameObject Player;
 
-    //stores Quest man NPC to refer to code later 
+    ///<summary>
+    ///Var to store QuestMan obj to check bool from
+    /// </summary> 
     public GameObject QuestMan;
 
-    //Store UI text component shows interact dialogue
+    ///<summary>
+    ///Stores text that shows Dialogue
+    /// </summary>
     public Text Dialogue;
 
     //activates upon game starting
@@ -28,7 +34,9 @@ public class FinalDoor : MonoBehaviour
     {
         Player = GameObject.FindGameObjectWithTag("Playe");
     }
-    //interact script
+    ///<summary>
+    ///Functions to execute upon interact
+    /// </summary>
     public void Interact()
     {
         //Stop all coroutines upon interact (only text as of now)
@@ -36,7 +44,9 @@ public class FinalDoor : MonoBehaviour
         Function();
     }
 
-    //Coroutine that controls dialogue display
+    ///<summary>
+    ///Set mesh collision and renderer inactive if critera are met
+    /// </summary>
     public void Function()
     {
         if (!Player.transform.GetComponent<SamplePlayer>().OpenSesame || !QuestMan.transform.GetComponent<TestQuestMan>().CompleteQuest2)
@@ -52,7 +62,9 @@ public class FinalDoor : MonoBehaviour
 
         }
     }
-    //Coroutine that controls dialogue display. Variable "a" is the text to display
+    ///<summary>
+    ///Coroutine for dialogue control. "a" is the string to display
+    /// </summary>
     IEnumerator DialogueControl(string a)
     {
         for (int i = 0; i < 2; ++i)

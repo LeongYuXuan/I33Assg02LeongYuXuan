@@ -15,13 +15,19 @@ using UnityEngine.UI;
 
 public class FinalItem : MonoBehaviour
 {
-    //variable that stores the game object that the script would impact 
+    ///<summary>
+    ///Var to store player obj to check bool from
+    /// </summary> 
     public GameObject Player;
 
-    //Store UI text component that shows interact dialogue
+    ///<summary>
+    ///Store UI Text for dialogue display
+    /// </summary>
     public Text Dialogue;
 
-    //Stores UI text that shows the number of items collected
+    ///<summary>
+    ///Store UI text that shows how many things the player has collected
+    /// </summary>
     public Text Count;
 
     //activates upon game starting
@@ -29,7 +35,9 @@ public class FinalItem : MonoBehaviour
     {
         Player = GameObject.FindGameObjectWithTag("Playe");
     }
-    //interact script
+    ///<summary>
+    ///Scripts to execute upon interaction
+    /// </summary>
     public void Interact()
     {
         StopAllCoroutines();
@@ -47,6 +55,9 @@ public class FinalItem : MonoBehaviour
         GetComponent<MeshRenderer>().enabled = false;
     }
 
+    ///<summary>
+    ///Coroutine for Dialogue control, with "a" being string to display
+    /// </summary>
     IEnumerator DialogueControl(string a)
     {
         for (int i = 0; i < 2; ++i)

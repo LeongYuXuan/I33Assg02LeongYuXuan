@@ -17,33 +17,52 @@ using UnityEngine.UI;
 
 public class TestQuestMan : MonoBehaviour
 {
-    //for testing 
+    ///<summary>
+    ///Store Player obj to refer to later
+    ///</summary> 
     public GameObject Player;
 
-    //Stores UI Text that displays number of quest items collected
+    ///<summary>
+    ///Store UI Text that shows how many items collected
+    ///</summary> 
     public Text Count;
 
-    //Store UI text component shows interact dialogue
+    ///<summary>
+    ///Store UI text that shows dialogue
+    ///</summary> 
     public Text Dialogue;
 
-    //bool to prevent repeated interactions and trigger quest2
+    ///<summary>
+    ///bool to prevent repeated interactions and trigger quest2
+    ///</summary> 
     [HideInInspector]
     public bool CompleteQuest1 = false;
-    //bool to prevent repeated interactions and trigger quest2
+
+    /// <summary>
+    /// bool to prevent repeated interactions
+    /// </summary>
     [HideInInspector]
     public bool CompleteQuest2 = false;
-    //bool to start quest
+
+    /// <summary>
+    /// bool to start quest
+    /// </summary>
     [HideInInspector]
     public bool GrandQuestStart = false;
 
-    //interact script
+    /// <summary>
+    /// Scripts to execute upon interact
+    /// </summary>
     public void Interact()
     {
-        //Stop all coroutines upon interact (only text as of now)
+        //Stop all coroutines upon interact
         StopAllCoroutines();
         Quest();
     }
 
+    /// <summary>
+    /// The quest chain!
+    /// </summary>
     private void Quest()
     {
         //Only Start quest code if player actually talks to the guy first
@@ -107,7 +126,12 @@ public class TestQuestMan : MonoBehaviour
         }
     }
 
-    //Coroutine that controls dialogue display. Variable "a" is the text to display
+
+    /// <summary>
+    /// Coroutine that controls dialogue display. Variable "a" is the text to display
+    /// Bool "Talk2" is for triggering 2nd dialogue if needed
+    /// Varaible "b" is the 2nd text to display 
+    /// </summary>
     IEnumerator DialogueControl(string a, bool Talk2, string b)
     {
         for (int i = 0; i < 2; ++i)

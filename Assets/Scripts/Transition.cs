@@ -130,8 +130,6 @@ public class Transition : MonoBehaviour
             {
                 StartCoroutine(DialogueControl("A strong freezing gale. It's too cold to enter..."));
             }
-            
-
         }
 
 
