@@ -9,6 +9,8 @@ TagManager:
   - Transition
   - FinalDoor
   - FinalItem
+  - TestQuestMan
+  - Switch
   layers:
   - Default
   - TransparentFX
