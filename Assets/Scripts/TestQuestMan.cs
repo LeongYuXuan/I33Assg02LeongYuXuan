@@ -99,7 +99,7 @@ public class TestQuestMan : MonoBehaviour
                 //do things once reaching criteria
                 if (Player.GetComponent<SamplePlayer>().testCollect >= 6 && !CompleteQuest2)
                 {
-                    StartCoroutine(DialogueControl("Wow, did't expect you to actually come back with 6. That's superb on your part.", true, "A key? I think this door had a keyhole, you could try it on that."));
+                    StartCoroutine(DialogueControl("Wow, did't expect you to actually come back with 6. That's superb on your part.", true, "A key? I recall seeing something keyhole-like on that structure outside. Maybe try it on that? "));
                     //resets value or something.
                     Player.GetComponent<SamplePlayer>().testCollect = 0;
                     Count.text = "Things Collected: " + "0";
@@ -109,7 +109,7 @@ public class TestQuestMan : MonoBehaviour
             }
             else
             {
-                StartCoroutine(DialogueControl("Try it on the door, I have your back", false, "b"));
+                StartCoroutine(DialogueControl("I'll stay here", false, "b"));
             }
         }
 

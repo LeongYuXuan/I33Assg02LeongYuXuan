@@ -71,10 +71,12 @@ public class Switch : MonoBehaviour
         }
         else
         {
-            if(!AltSwitch)
+            if(AltSwitch)
             {
                 StartCoroutine(DialogueControl("Yikes! The Floor!"));
                 Snapped2.SetActive(false);
+                GetComponent<MeshCollider>().enabled = false;
+                GetComponent<MeshRenderer>().enabled = false;
             }
             else
             {
