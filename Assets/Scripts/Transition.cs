@@ -50,13 +50,25 @@ public class Transition : MonoBehaviour
     private bool ToggleParticle = true;
 
     ///<summary>
-    ///Funtion to execute upon interact 
+    ///Store UI canvas for loading screens
+    /// </summary>
+    public GameObject Loading;
+
+    ///<summary>
+    ///Functions to execute upon interact 
     /// </summary>
     public void Interact()
     {
         //Stop all coroutines upon interact
         StopAllCoroutines();
-
+        Teleport();
+    }
+    ///<summary>
+    ///Teleport Function
+    ///</summary>
+    void Teleport()
+     {
+        //
         //Update player position via updating player obj
         Player = GameObject.FindGameObjectWithTag("Playe");
         //var to store player pos for easier management
@@ -69,21 +81,7 @@ public class Transition : MonoBehaviour
         //Right teleport coord
         Vector3 Right = transform.position - (-transform.right * 2);
 
-        //enable/diable assigned particle if it is not null
-        if (Particle != null)
-        {
-            if (ToggleParticle)
-            {
-                Particle.Pause();
-            } 
-            else
-            {
-                Particle.Play();
-            }
-            ToggleParticle = !ToggleParticle;
-        }
-
-        //teleports player on x or z axis depending on the bool
+        //teleports player on x if true
         if (teleportOnX)
         {
             //activate teleport if player has started the quest
@@ -99,15 +97,17 @@ public class Transition : MonoBehaviour
                 else if (playerPos.x < telePos.x)
                 {
                     Player.transform.position = Right;
-
                 }
-            }//give message regarding why transition is locked
+                ParticleControl();
+                StartCoroutine(TransitionControl());
+            }
+            //give message regarding why transition is locked
             else
             {
                 StartCoroutine(DialogueControl("There's a hole here, but there are boxes in the way."));
             }
-            
         }
+        //teleports player on z if false
         else
         {
             //activate teleport if player completes first quest
@@ -125,18 +125,21 @@ public class Transition : MonoBehaviour
                     Player.transform.position = Right;
 
                 }
+            ParticleControl();
+            StartCoroutine(TransitionControl());
             }
+            //give message why it is locked
             else
             {
                 StartCoroutine(DialogueControl("A strong freezing gale. It's too cold to enter..."));
             }
         }
+     }
 
-
-        ///<summary>
-        ///Dialogue Display Coroutine. "a" is the string to display
-        /// </summary>
-        IEnumerator DialogueControl(string a)
+    ///<summary>
+    ///Dialogue Display Coroutine. "a" is the string to display
+    /// </summary>
+    IEnumerator DialogueControl(string a)
         {
             for (int i = 0; i < 2; ++i)
             {
@@ -159,5 +162,48 @@ public class Transition : MonoBehaviour
 
         }
 
+    ///<summary>
+    ///Control particle play/pause if teleport successful
+    ///</summary>
+    void ParticleControl()
+        {
+            //enable/diable assigned particle if it is not null
+            if (Particle != null)
+            {
+                if (ToggleParticle)
+                {
+                    Particle.Pause();
+                }
+                else
+                {
+                    Particle.Play();
+                }
+                ToggleParticle = !ToggleParticle;
+            }
+        }
+
+    ///<summary>
+    ///Coroutine for transitions if teleports are successful. They last 1 second
+    ///</summary>
+    IEnumerator TransitionControl()
+    {
+        for(int i = 0; i < 2; ++i)
+        {
+            if(i == 0)
+            {
+                Loading.SetActive(true);
+                Player.GetComponent<SamplePlayer>().CanMove = false;
+            }
+            else if(i == 1)
+            {
+                Loading.SetActive(false);
+                Player.GetComponent<SamplePlayer>().CanMove = true;
+            }
+            yield return new WaitForSeconds(1f);
+        }
+
+        
     }
+
+
 }
