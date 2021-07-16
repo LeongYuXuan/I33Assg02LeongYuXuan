@@ -19,22 +19,42 @@ using UnityEngine.UI;
 
 public class Transition : MonoBehaviour
 {
-    //store's player obj for reference later 
+    ///<summary>
+    ///Store Player obj to teleport 
+    /// </summary> 
     public GameObject Player;
 
-    //var to store quest man as bools used there would be used to lock transitions
+    ///<summary>
+    ///Variable to store Questman obj. Bools here used to lock teleport
+    /// </summary>
     public GameObject QuestMan;
 
-    //bool to tell obj which direction to teleport player
+    ///<summary>
+    ///Bool to control which direction to teleport on 
+    /// </summary>
     public bool teleportOnX;
 
-    //Store UI text component shows interact dialogue
+    ///<summary>
+    ///Stores text that shows dialogue  
+    /// </summary>
     public Text Dialogue;
 
-    //interact script
+    ///<summary>
+    ///Store Particle obj to disable/enable later 
+    /// </summary>
+    public ParticleSystem Particle;
+
+    ///<summary>
+    ///Bool to toggle Particle SetActive State 
+    /// </summary>
+    private bool ToggleParticle = true;
+
+    ///<summary>
+    ///Funtion to execute upon interact 
+    /// </summary>
     public void Interact()
     {
-        //Stop all coroutines upon interact (only text as of now)
+        //Stop all coroutines upon interact
         StopAllCoroutines();
 
         //Update player position via updating player obj
@@ -48,6 +68,20 @@ public class Transition : MonoBehaviour
         Vector3 Left = transform.position - (transform.right * 2);
         //Right teleport coord
         Vector3 Right = transform.position - (-transform.right * 2);
+
+        //enable/diable assigned particle if it is not null
+        if (Particle != null)
+        {
+            if (ToggleParticle)
+            {
+                Particle.Pause();
+            } 
+            else
+            {
+                Particle.Play();
+            }
+            ToggleParticle = !ToggleParticle;
+        }
 
         //teleports player on x or z axis depending on the bool
         if (teleportOnX)
@@ -76,6 +110,7 @@ public class Transition : MonoBehaviour
         }
         else
         {
+            //activate teleport if player completes first quest
             if (QuestMan.GetComponent<TestQuestMan>().CompleteQuest1)
             {
                 //Teleport left if player is to the right
@@ -100,7 +135,9 @@ public class Transition : MonoBehaviour
         }
 
 
-        //Coroutine that controls dialogue display. Variable "a" is the text to display
+        ///<summary>
+        ///Dialogue Display Coroutine. "a" is the string to display
+        /// </summary>
         IEnumerator DialogueControl(string a)
         {
             for (int i = 0; i < 2; ++i)
