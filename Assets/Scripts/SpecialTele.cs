@@ -27,6 +27,11 @@ public class SpecialTele : MonoBehaviour
     public ParticleSystem Particle;
 
     ///<summary>
+    ///Store Questman obj for a certain bool
+    /// </summary> 
+    public GameObject TestQuestMan;
+
+    ///<summary>
     ///Bool to toggle Particle SetActive State 
     /// </summary>
     private bool ToggleParticle = true;
@@ -51,8 +56,12 @@ public class SpecialTele : MonoBehaviour
         TeleLocate = StartArea.transform.position;
     }
 
+    /// <summary>
+    /// Scripts to execute upon trigger enter
+    /// </summary>
     private void OnTriggerEnter(Collider other)
     {
+        StopAllCoroutines();
 
         ///<summary>
         ///Reset the player's position
@@ -60,6 +69,8 @@ public class SpecialTele : MonoBehaviour
         Player.transform.position = TeleLocate;
         ParticleControl();
         StartCoroutine(TransitionControl());
+        TestQuestMan.GetComponent<TestQuestMan>().Special = true;
+        
 
 
     }

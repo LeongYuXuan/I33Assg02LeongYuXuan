@@ -51,6 +51,12 @@ public class TestQuestMan : MonoBehaviour
     public bool GrandQuestStart = false;
 
     /// <summary>
+    /// bool to start quest
+    /// </summary>
+    [HideInInspector]
+    public bool Special = false;
+
+    /// <summary>
     /// Scripts to execute upon interact
     /// </summary>
     public void Interact()
@@ -106,6 +112,10 @@ public class TestQuestMan : MonoBehaviour
                     Count.gameObject.SetActive(false);
                     CompleteQuest2 = true;
                 }
+            }
+            else if(Special)
+            {
+                StartCoroutine(DialogueControl("Woah, you came out of nowhere! What did you do?", true, "Whatever you did, the door on its own. Maybe we could scout it before they come back?"));
             }
             else
             {
