@@ -89,9 +89,9 @@ public class TestQuestMan : MonoBehaviour
                     //reset values for the next quest
                     Player.GetComponent<SamplePlayer>().testCollect = 0;
                     Count.text = "Things Collected: " + "0";
-                    StartCoroutine(DialogueControl("Thank you for those, I really needed the heat. \n" +
+                    StartCoroutine(DialogueControl("(1/2) Thank you for those, I really needed the heat.  \n" +
                         "You may have seen the ruins outside. We suspect there could be some artefacts in there. Could you get 6 of such?", true, 
-                        "Here, I gave you a spare heat lamp. Don't ask why I bought two but only had one battery..."));
+                        "(2/2) Here, I gave you a spare heat lamp. Don't ask why I bought two but only had one battery..."));
                 }
             }
             //execute quest 2 code if quest 1 is complete and quest 2 isn't
@@ -105,7 +105,7 @@ public class TestQuestMan : MonoBehaviour
                 //do things once reaching criteria
                 if (Player.GetComponent<SamplePlayer>().testCollect >= 6 && !CompleteQuest2)
                 {
-                    StartCoroutine(DialogueControl("Wow, did't expect you to actually come back with 6. That's superb on your part.", true, "A key? I recall seeing something keyhole-like on that structure outside. Maybe try it on that? "));
+                    StartCoroutine(DialogueControl("(1/2) Wow, did't expect you to actually come back with 6. That's superb on your part.", true, " (2/2)A key? I recall seeing something keyhole-like on that structure outside. Maybe try it on that? "));
                     //resets value or something.
                     Player.GetComponent<SamplePlayer>().testCollect = 0;
                     Count.text = "Things Collected: " + "0";
@@ -115,11 +115,11 @@ public class TestQuestMan : MonoBehaviour
             }
             else if(Special)
             {
-                StartCoroutine(DialogueControl("Woah, you came out of nowhere! What did you do?", true, "Whatever you did, the door on its own. Maybe we could scout it before they come back?"));
+                StartCoroutine(DialogueControl("(1/2) Woah, you came out of nowhere! What did you do?", true, "(2/2)Whatever you did, the door opened on its own. Maybe we could scout it before they come back?"));
             }
             else
             {
-                StartCoroutine(DialogueControl("I'll stay here", false, "b"));
+                StartCoroutine(DialogueControl("(2/2) Try using the key you have on the obelisk outside.", false, "b"));
             }
         }
 
@@ -129,8 +129,8 @@ public class TestQuestMan : MonoBehaviour
             GrandQuestStart = true;
             Count.gameObject.SetActive(true);
             Count.text = "Things Collected: " + "0";
-            StartCoroutine(DialogueControl("Hey, you're a little late. Everyone but me went to collect tools. Can you believe they forgot to get the crowbar?", 
-                true, "I'm trying to find a non-destructive way to open this door, but it is getting cold. Could you find three batteries? \n" +
+            StartCoroutine(DialogueControl("(1/2) Hey, you're a little late. Everyone but me went to collect tools. Can you believe they forgot to get the crowbar?", 
+                true, "(2/2) I'm trying to find a non-destructive way to open this door, but it is getting cold. Could you find three batteries? \n" +
                 "There should be some outside, I only have one on me..."));
            
         }
